@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LKPD Fungsi Eksponensial - Pertumbuhan & Peluruhan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+  <style>
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+      body {
+        background-color: white !important;
+        color: black !important;
+      }
+      .page-break {
+        page-break-before: always;
+      }
+      .card-shadow {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+      }
+    }
+    .dotted-line {
+      border-bottom: 2px dotted #9ca3af;
+      display: inline-block;
+      width: 100%;
+      min-height: 1.5rem;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans p-4 md:p-8">
+
+  <!-- Floating Control Bar (No Print) -->
+  <div class="no-print max-w-4xl mx-auto mb-6 flex justify-between items-center bg-white p-4 rounded-xl shadow-md border border-slate-200">
+    <div class="flex items-center space-x-2">
+      <span class="inline-block w-3 h-3 bg-indigo-600 rounded-full"></span>
+      <h1 class="font-bold text-slate-700">Modul LKPD Digital & Siap Cetak</h1>
+    </div>
+    <div class="flex gap-3">
+      <button onclick="toggleAnswers()" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-lg text-sm transition">
+        <span id="btn-answer-text">Tampilkan Kunci Jawaban (Guru)</span>
+      </button>
+      <button onclick="window.print()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg text-sm transition flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+        </svg>
+        Cetak / Simpan PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- LKPD Main Container -->
+  <div class="max-w-4xl mx-auto bg-white p-6 md:p-10 rounded-2xl shadow-xl border border-slate-200 space-y-8 card-shadow">
+    
+    <!-- Header LKPD -->
+    <div class="border-b-4 border-indigo-600 pb-6">
+      <div class="flex justify-between items-center mb-4">
+        <div>
+          <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Matematika - Fase E (Kelas X)</span>
+          <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 mt-2">LEMBAR KERJA PESERTA DIDIK (LKPD)</h1>
+          <h2 class="text-lg font-semibold text-indigo-600">Materi: Pertumbuhan dan Peluruhan Eksponensial</h2>
+        </div>
+        <div class="text-right hidden sm:block">
+          <div class="text-sm text-slate-500">Kurikulum Merdeka</div>
+          <div class="text-sm font-medium text-slate-700">Waktu: 2 x 45 Menit</div>
+        </div>
+      </div>
+
+      <!-- Identitas Kelompok -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200 mt-4 text-sm">
+        <div>
+          <label class="font-bold text-slate-700">Kelompok / Kelas:</label>
+          <div class="dotted-line mt-1"></div>
+        </div>
+        <div>
+          <label class="font-bold text-slate-700">Tanggal:</label>
+          <div class="dotted-line mt-1"></div>
+        </div>
+        <div class="md:col-span-2">
+          <label class="font-bold text-slate-700">Nama Anggota Kelompok:</label>
+          <div class="grid grid-cols-2 gap-2 mt-2">
+            <div class="flex items-center gap-2"><span>1.</span> <span class="dotted-line"></span></div>
+            <div class="flex items-center gap-2"><span>3.</span> <span class="dotted-line"></span></div>
+            <div class="flex items-center gap-2"><span>2.</span> <span class="dotted-line"></span></div>
+            <div class="flex items-center gap-2"><span>4.</span> <span class="dotted-line"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Capaian & Tujuan Pembelajaran -->
+    <div class="bg-indigo-50 border-l-4 border-indigo-600 p-4 rounded-r-xl">
+      <h3 class="font-bold text-indigo-900 text-md mb-2">🎯 Tujuan Pembelajaran:</h3>
+      <ol class="list-decimal list-inside text-sm text-indigo-950 space-y-1">
+        <li>Peserta didik dapat mengidentifikasi karakteristik dan pola dari fenomena pertumbuhan dan peluruhan eksponensial.</li>
+        <li>Peserta didik dapat memodelkan masalah kontekstual ke dalam bentuk rumus pertumbuhan dan peluruhan eksponensial.</li>
+        <li>Peserta didik dapat menyelesaikan masalah nyata yang berkaitan dengan fungsi eksponensial dengan tepat.</li>
+      </ol>
+    </div>
+
+    <!-- PETUNJUK KERJA -->
+    <div>
+      <h3 class="font-bold text-slate-800 text-lg mb-2 flex items-center gap-2">
+        <span>📌</span> Petunjuk Penggunaan
+      </h3>
+      <ul class="list-disc list-inside text-sm text-slate-600 space-y-1 bg-slate-50 p-3 rounded-lg border border-slate-200">
+        <li>Bacalah setiap stimulus kasus kontekstual dengan cermat bersama kelompokmu.</li>
+        <li>Isilah tabel pengamatan berdasarkan pola pertumbuhan atau peluruhan yang diberikan.</li>
+        <li>Temukan rumus umum fungsi eksponensial berdasarkan pola angka yang telah dianalisis.</li>
+        <li>Gunakan rumus yang telah ditemukan untuk menjawab pertanyaan evaluasi di akhir kegiatan.</li>
+      </ul>
+    </div>
+
+    <hr class="border-slate-200">
+
+    <!-- KEGIATAN 1: PERTUMBUHAN EKSPONENSIAL -->
+    <div class="space-y-4">
+      <div class="bg-emerald-600 text-white px-4 py-2 rounded-lg font-bold text-md flex justify-between items-center">
+        <span>KEGIATAN 1: Eksplorasi Pertumbuhan Eksponensial (Exponential Growth)</span>
+        <span class="text-xs bg-emerald-700 px-2 py-1 rounded">Model Bakteri</span>
+      </div>
+
+      <!-- Stimulus Kasus 1 -->
+      <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-sm text-emerald-900 leading-relaxed">
+        <strong>🧫 Kasus 1: Pembelahan Bakteri Salmonella</strong><br>
+        Sebuah penelitian laboratorium mengamati pertumbuhan populasi bakteri *Salmonella*. Pada awal pengamatan ($t = 0$), terdapat <strong>$100$ sel bakteri</strong>. Setiap $1$ jam, setiap sel bakteri membelah diri menjadi $2$ sel secara sempurna (jumlahnya menjadi dua kali lipat dari jam sebelumnya).
+      </div>
+
+      <p class="text-sm font-semibold text-slate-700">Langkah 1: Isilah tabel perkembangan jumlah bakteri berikut!</p>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm text-left text-slate-700 border-collapse border border-slate-300 rounded-lg">
+          <thead class="bg-slate-100 text-slate-800 font-bold border-b border-slate-300">
+            <tr>
+              <th class="p-3 border border-slate-300 text-center">Waktu ($t$ jam)</th>
+              <th class="p-3 border border-slate-300 text-center">Proses Pembentukan Jumlah Bakteri</th>
+              <th class="p-3 border border-slate-300 text-center">Jumlah Bakteri $N(t)$</th>
+              <th class="p-3 border border-slate-300 text-center">Bentuk Eksponen ($100 \times 2^t$)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-3 border border-slate-300 text-center font-medium">0</td>
+              <td class="p-3 border border-slate-300 text-center">$100$</td>
+              <td class="p-3 border border-slate-300 text-center">$100$</td>
+              <td class="p-3 border border-slate-300 text-center">$100 \times 2^0$</td>
+            </tr>
+            <tr>
+              <td class="p-3 border border-slate-300 text-center font-medium">1</td>
+              <td class="p-3 border border-slate-300 text-center">$100 \times 2$</td>
+              <td class="p-3 border border-slate-300 text-center">$200$</td>
+              <td class="p-3 border border-slate-300 text-center">$100 \times 2^1$</td>
+            </tr>
+            <tr>
+              <td class="p-3 border border-slate-300 text-center font-medium">2</td>
+              <td class="p-3 border border-slate-300 text-center">$100 \times 2 \times 2$</td>
+              <td class="p-3 border border-slate-300 text-center"><span class="answer-key hidden text-emerald-600 font-bold">400</span></td>
+              <td class="p-3 border border-slate-300 text-center"><span class="answer-key hidden text-emerald-600 font-bold">$100 \times 2^2$</span></td>
+            </tr>
+            <tr>
+              <td class="p-3 border border-slate-300 text-center font-medium">3</td>
+              <td class="p-3 border border-slate-300 text-center"><span class="answer-key hidden text-emerald-600 font-bold">$100 \times 2 \times 2 \times 2$</span></td>
+              <td class="p-3 border border-slate-300 text-center"><span class="answer-key hidden text-emerald-600 font-bold">800</span></td>
+              <td class="p-3 border border-slate-300 text-center"><span class="answer-key hidden text-emerald-600 font-bold">$100 \times 2^3$</span></td>
+            </tr>
+            <tr>
+              <td class="p-3 border border-slate-300 text-center font-medium">4</td>
+              <td class="p-3 border border-slate-300 text-center"><span class="answer-key hidden text-emerald-600 font-bold">$100 \times 2 \times 2 \times 2 \times 2$</span></td>
+              <td class="p-3 border border-slate-300 text-center"><span class="answer-key hidden text-emerald-600 font-bold">1600</span></td>
+              <td class="p-3 border border-slate-300 text-center"><span class="answer-key hidden text-emerald-600 font-bold">$100 \times 2^4$</span></td>
+            </tr>
+            <tr class="bg-indigo-50 font-bold">
+              <td class="p-3 border border-slate-300 text-center">$t$</td>
+              <td class="p-3 border border-slate-300 text-center">...</td>
+              <td class="p-3 border border-slate-300 text-center">$N(t) = ?$</td>
+              <td class="p-3 border border-slate-300 text-center"><span class="answer-key hidden text-emerald-600 font-bold">$100 \times 2^t$</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Analysis Questions 1 -->
+      <div class="space-y-3 pt-2 text-sm">
+        <p class="font-semibold text-slate-800">Langkah 2: Jawab pertanyaan analisis berikut!</p>
+        
+        <div>
+          <label class="block text-slate-700 font-medium">a. Berapakah jumlah awal bakteri ($N_0$) sebelum membelah?</label>
+          <div class="p-2 border border-slate-300 rounded-md min-h-[40px] bg-slate-50 mt-1">
+            <span class="answer-key hidden text-indigo-700 font-semibold">$N_0 = 100$ sel bakteri.</span>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-slate-700 font-medium">b. Berapa laju pertumbuhan/faktor pengali ($a$) pembelahan setiap jamnya?</label>
+          <div class="p-2 border border-slate-300 rounded-md min-h-[40px] bg-slate-50 mt-1">
+            <span class="answer-key hidden text-indigo-700 font-semibold">Faktor pengali $a = 2$ (karena membelah dua kali lipat setiap jam).</span>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-slate-700 font-medium">c. Tuliskan bentuk umum fungsi pertumbuhan eksponensial $N(t)$ untuk jumlah awal $N_0$ dan rasio pertumbuhan $r$ (atau faktor pengali $a = 1 + r$):</label>
+          <div class="p-3 border-2 border-dashed border-indigo-300 rounded-lg bg-indigo-50/50 mt-1">
+            <div class="text-center font-serif text-base">
+              <strong>Rumus Umum Pertumbuhan Eksponensial:</strong><br>
+              <span class="answer-key hidden text-indigo-700 font-bold text-lg mt-2 inline-block">
+                $$N(t) = N_0 \cdot (1 + r)^t \quad \text{atau} \quad N(t) = N_0 \cdot a^t$$
+              </span>
+              <span class="answer-key block text-xs text-slate-600 font-sans mt-1">
+                Keterangan: $N(t) =$ jumlah akhir, $N_0 =$ jumlah awal, $r =$ persentase pertumbuhan, $t =$ periode waktu.
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- KEGIATAN 2: PELURUHAN EKSPONENSIAL -->
+    <div class="space-y-4 pt-4">
+      <div class="bg-rose-600 text-white px-4 py-2 rounded-lg font-bold text-md flex justify-between items-center">
+        <span>KEGIATAN 2: Eksplorasi Peluruhan Eksponensial (Exponential Decay)</span>
+        <span class="text-xs bg-rose-700 px-2 py-1 rounded">Model Depresiasi Nilai Barang</span>
+      </div>
+
+      <!-- Stimulus Kasus 2 -->
+      <div class="bg-rose-50 border border-rose-200 p-4 rounded-xl text-sm text-rose-900 leading-relaxed">
+        <strong>🚗 Kasus 2: Penurunan Nilai (Depresiasi) Harga Mobil</strong><br>
+        Pak Budi membeli sebuah mobil baru seharga <strong>Rp $200.000.000,00$</strong> pada tahun $2024$. Karena adanya penyusutan (depresiasi), nilai jual mobil tersebut mengalami penurunan sebesar <strong>$10\%$ ($0{,}10$) setiap tahunnya</strong> dari nilai tahun sebelumnya.
+      </div>
+
+      <p class="text-sm font-semibold text-slate-700">Langkah 1: Lengkapi tabel penurunan harga mobil berikut!</p>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm text-left text-slate-700 border-collapse border border-slate-300 rounded-lg">
+          <thead class="bg-slate-100 text-slate-800 font-bold border-b border-slate-300">
+            <tr>
+              <th class="p-3 border border-slate-300 text-center">Tahun ke- ($t$)</th>
+              <th class="p-3 border border-slate-300 text-center">Persentase Nilai Sisa ($1 - 0{,}10 = 0{,}90$)</th>
+              <th class="p-3 border border-slate-300 text-center">Nilai Mobil (Rupiah)</th>
+              <th class="p-3 border border-slate-300 text-center">Bentuk Eksponen ($200.000.000 \times (0{,}9)^t$)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-3 border border-slate-300 text-center font-medium">0</td>
+              <td class="p-3 border border-slate-300 text-center font-mono">100% (1,0)</td>
+              <td class="p-3 border border-slate-300 text-center">200.000.000</td>
+              <td class="p-3 border border-slate-300 text-center">$200.000.000 \times (0{,}9)^0$</td>
+            </tr>
+            <tr>
+              <td class="p-3 border border-slate-300 text-center font-medium">1</td>
+              <td class="p-3 border border-slate-300 text-center">$200.000.000 \times 0{,}9$</td>
+              <td class="p-3 border border-slate-300 text-center">180.000.000</td>
+              <td class="p-3 border border-slate-300 text-center">$200.000.000 \times (0{,}9)^1$</td>
+            </tr>
+            <tr>
+              <td class="p-3 border border-slate-300 text-center font-medium">2</td>
+              <td class="p-3 border border-slate-300 text-center"><span class="answer-key hidden text-rose-600 font-bold">$180.000.000 \times 0{,}9$</span></td>
+              <td class="p-3 border border-slate-300 text-center"><span class="answer-key hidden text-rose-600 font-bold">162.000.000</span></td>
+              <td class="p-3 border border-slate-300 text-center"><span class="answer-key hidden text-rose-600 font-bold">$200.000.000 \times (0{,}9)^2$</span></td>
+            </tr>
+            <tr>
+              <td class="p-3 border border-slate-300 text-center font-medium">3</td>
+              <td class="p-3 border border-slate-300 text-center"><span class="answer-key hidden text-rose-600 font-bold">$162.000.000 \times 0{,}9$</span></td>
+              <td class="p-3 border border-slate-300 text-center"><span class="answer-key hidden text-rose-600 font-bold">145.800.000</span></td>
+              <td class="p-3 border border-slate-300 text-center"><span class="answer-key hidden text-rose-600 font-bold">$200.000.000 \times (0{,}9)^3$</span></td>
+            </tr>
+            <tr class="bg-rose-50 font-bold">
+              <td class="p-3 border border-slate-300 text-center">$t$</td>
+              <td class="p-3 border border-slate-300 text-center">...</td>
+              <td class="p-3 border border-slate-300 text-center">$N(t) = ?$</td>
+              <td class="p-3 border border-slate-300 text-center"><span class="answer-key hidden text-rose-600 font-bold">$200.000.000 \times (0{,}9)^t$</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Analysis Questions 2 -->
+      <div class="space-y-3 pt-2 text-sm">
+        <p class="font-semibold text-slate-800">Langkah 2: Jawab pertanyaan analisis berikut!</p>
+        
+        <div>
+          <label class="block text-slate-700 font-medium">a. Berapakah nilai sisa yang tersisa dalam bentuk desimal setelah dikurangi laju penyusutan $r = 10\%$?</label>
+          <div class="p-2 border border-slate-300 rounded-md min-h-[40px] bg-slate-50 mt-1">
+            <span class="answer-key hidden text-indigo-700 font-semibold">Faktor peluruhan $= 1 - r = 1 - 0{,}10 = 0{,}90$ (atau $90\%$).</span>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-slate-700 font-medium">b. Tuliskan bentuk umum fungsi peluruhan eksponensial $N(t)$ untuk nilai awal $N_0$ dan laju peluruhan $r$:</label>
+          <div class="p-3 border-2 border-dashed border-rose-300 rounded-lg bg-rose-50/50 mt-1">
+            <div class="text-center font-serif text-base">
+              <strong>Rumus Umum Peluruhan Eksponensial:</strong><br>
+              <span class="answer-key hidden text-rose-700 font-bold text-lg mt-2 inline-block">
+                $$N(t) = N_0 \cdot (1 - r)^t \quad \text{atau} \quad N(t) = N_0 \cdot a^t \quad (0 < a < 1)$$
+              </span>
+              <span class="answer-key block text-xs text-slate-600 font-sans mt-1">
+                Keterangan: $N_0 =$ nilai awal, $r =$ laju peluruhan/penyusutan per periode, $t =$ jumlah periode.
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="border-slate-200">
+
+    <!-- LATIHAN SOAL KONTEKSTUAL -->
+    <div class="space-y-6">
+      <div class="bg-slate-800 text-white px-4 py-2 rounded-lg font-bold text-md flex justify-between items-center">
+        <span>✏️ LATIHAN MANDIRI & APLIKASI KONTEKSTUAL</span>
+        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Evaluasi Individu / Kelompok</span>
+      </div>
+
+      <!-- Soal 1 -->
+      <div class="border border-slate-200 p-4 rounded-xl space-y-2 bg-slate-50">
+        <h4 class="font-bold text-slate-800 text-sm">Soal 1 (Pertumbuhan Penduduk):</h4>
+        <p class="text-sm text-slate-700 leading-relaxed">
+          Pada tahun $2023$, jumlah penduduk di suatu kota tercatat sebanyak <strong>$500.000$ jiwa</strong>. Tingkat pertumbuhan penduduk di kota tersebut diperkirakan konstan sebesar <strong>$2\%$ per tahun</strong>.
+        </p>
+        <p class="text-sm font-medium text-indigo-900">Pertanyaan:</p>
+        <ol class="list-alpha list-inside text-sm text-slate-700 space-y-1">
+          <li>Tuliskan fungsi eksponensial yang memodelkan jumlah penduduk kota tersebut setelah $t$ tahun!</li>
+          <li>Perkirakan berapa jumlah penduduk kota tersebut pada tahun $2026$ ($t = 3$ tahun)!</li>
+        </ol>
+
+        <!-- Lembar Jawab Soal 1 -->
+        <div class="mt-3 p-3 bg-white border border-slate-300 rounded-lg min-h-[100px] text-sm">
+          <span class="font-bold text-slate-400 block mb-1">Penyelesaian Soal 1:</span>
+          <div class="answer-key hidden text-slate-800 space-y-2">
+            <p><strong>a. Model Fungsi:</strong><br>
+            $N_0 = 500.000$, $r = 2\% = 0{,}02$<br>
+            $N(t) = N_0 (1 + r)^t = 500.000 \cdot (1 + 0{,}02)^t$<br>
+            $\mathbf{N(t) = 500.000 \cdot (1{,}02)^t}$</p>
+            
+            <p><strong>b. Jumlah penduduk tahun 2026 ($t = 3$):</strong><br>
+            $N(3) = 500.000 \cdot (1{,}02)^3$<br>
+            $N(3) = 500.000 \cdot 1{,}061208 = \mathbf{530.604 \text{ jiwa}}$</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Soal 2 -->
+      <div class="border border-slate-200 p-4 rounded-xl space-y-2 bg-slate-50">
+        <h4 class="font-bold text-slate-800 text-sm">Soal 2 (Peluruhan Dosis Obat dalam Tubuh):</h4>
+        <p class="text-sm text-slate-700 leading-relaxed">
+          Seorang pasien menyuntikkan dosis awal obat antibiotik sebanyak <strong>$80\text{ mg}$</strong>. Tubuh pasien metabolisme dan mengeluarkan obat tersebut sehingga konsentrasi obat berkurang sebesar <strong>$25\%$ setiap $2$ jam</strong>.
+        </p>
+        <p class="text-sm font-medium text-indigo-900">Pertanyaan:</p>
+        <ol class="list-alpha list-inside text-sm text-slate-700 space-y-1">
+          <li>Tuliskan rumus peluruhan konsentrasi obat $D(x)$ setelah $x$ periode ($1\text{ periode} = 2\text{ jam}$)!</li>
+          <li>Berapa sisa dosis obat yang tersisa di dalam tubuh pasien setelah $6\text{ jam}$?</li>
+        </ol>
+
+        <!-- Lembar Jawab Soal 2 -->
+        <div class="mt-3 p-3 bg-white border border-slate-300 rounded-lg min-h-[100px] text-sm">
+          <span class="font-bold text-slate-400 block mb-1">Penyelesaian Soal 2:</span>
+          <div class="answer-key hidden text-slate-800 space-y-2">
+            <p><strong>a. Model Fungsi:</strong><br>
+            $D_0 = 80\text{ mg}$, $r = 25\% = 0{,}25$<br>
+            $D(x) = 80 \cdot (1 - 0{,}25)^x = \mathbf{80 \cdot (0{,}75)^x}$</p>
+
+            <p><strong>b. Sisa obat setelah 6 jam:</strong><br>
+            Karena $1\text{ periode} = 2\text{ jam}$, maka untuk $6\text{ jam} \rightarrow x = \frac{6}{2} = 3\text{ periode}$.<br>
+            $D(3) = 80 \cdot (0{,}75)^3 = 80 \cdot 0{,}421875 = \mathbf{33{,}75\text{ mg}}$</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REFLEKSI SISWA -->
+    <div class="bg-indigo-50/70 p-4 rounded-xl border border-indigo-200 space-y-3">
+      <h3 class="font-bold text-indigo-900 text-sm flex items-center gap-2">
+        <span>💡</span> Refleksi Diri Peserta Didik
+      </h3>
+      <div class="text-sm text-slate-700 space-y-2">
+        <div>
+          <label class="block font-medium">1. Apa perbedaan utama antara rumus Pertumbuhan dan Peluruhan Eksponensial?</label>
+          <div class="dotted-line mt-1"></div>
+        </div>
+        <div>
+          <label class="block font-medium">2. Menurut kelompokmu, bagian mana dari materi ini yang paling menantang?</label>
+          <div class="dotted-line mt-1"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RUBRIK PENILAIAN RINGKAS (FOR TEACHERS) -->
+    <div class="text-xs text-slate-400 border-t pt-4 flex justify-between items-center">
+      <span>LKPD Matematika Wajib - Kurikulum Merdeka</span>
+      <span>Kunci Jawaban Interaktif Tersedia</span>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleAnswers() {
+      const answers = document.querySelectorAll('.answer-key');
+      const btnText = document.getElementById('btn-answer-text');
+      
+      let isHidden = true;
+      answers.forEach(el => {
+        if (el.classList.contains('hidden')) {
+          el.classList.remove('hidden');
+          isHidden = false;
+        } else {
+          el.classList.add('hidden');
+          isHidden = true;
+        }
+      });
+
+      if (!isHidden) {
+        btnText.innerText = "Sembunyikan Kunci Jawaban";
+      } else {
+        btnText.innerText = "Tampilkan Kunci Jawaban (Guru)";
+      }
+    }
+  </script>
+</body>
+</html>
